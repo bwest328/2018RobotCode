@@ -49,6 +49,8 @@ public class Robot extends IterativeRobot {
 	public Spark dropOffMotor;
 	public Spark intakeMotor1;
 	public Spark intakeMotor2;
+	public Spark climbingWinch;
+	public Spark climbingArm;
 	
 	//Joysticks
 	public Joystick leftStick;
@@ -136,6 +138,8 @@ public class Robot extends IterativeRobot {
 		liftMotor = new Spark(5);
 		intakeMotor1 = new Spark(6);
 		intakeMotor2 = new Spark(7);
+		climbingArm = new Spark(8);
+		climbingWinch = new Spark(9);
 		
 		//Joysticks
 		leftStick = new Joystick(0);
@@ -359,6 +363,22 @@ public class Robot extends IterativeRobot {
 			intakeMotor1.set(0);
 			intakeMotor2.set(0);
 			
+		}
+
+		if(rightStick.getRawButton(1) == true && leftStick.getRawButton(1) == false) {
+			climbingArm.set(.5);
+		} else if(rightStick.getRawButton(1) == false && leftStick.getRawButton(1) == true) {
+			climbingArm.set(-.5);
+		} else if (rightStick.getRawButton(1) == false && leftStick.getRawButton(1) == false) {
+			climbingArm.set(0);
+		}
+
+		if (rightStick.getRawButton(12) == true && leftStick.getRawButton(12) == false) {
+			climbingWinch.set(1);
+		} else if(rightStick.getRawButton(12) == false && leftStick.getRawButton(12) == true) {
+			climbingWinch.set(-1);
+		} else if (rightStick.getRawButton(12) == false && leftStick.getRawButton(12) == false) {
+			climbingWinch.set(0);
 		}
 	}
 	
