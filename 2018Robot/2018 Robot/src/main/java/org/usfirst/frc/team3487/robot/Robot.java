@@ -8,6 +8,10 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Timer;
 
+import net.bak3dnet.robotics.display.RevDigitDisplay;
+import net.bak3dnet.robotics.display.modules.RapidDiagnosticsModule;
+import net.bak3dnet.robotics.display.modules.BatteryPercentModule;
+
 ///////////////IOSetup//////////////
 //	Drive Motors				  //
 //	PWM 0 = Drive Motor Right 1	  //	
@@ -90,6 +94,10 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		
+		RevDigitDisplay display = RevDigitDisplay.getInstance();
+
+		display.setActiveModule(new RapidDiagnosticsModule(new BatteryPercentModule(12D)));	
+		
 		leftStart = new DigitalInput(0);
 		rightStart = new DigitalInput(2);
 		
@@ -105,25 +113,6 @@ public class Robot extends IterativeRobot {
 			rightStarting = true;
 		}
 		
-		if(leftStarting == true) {
-			System.out.println("NippleLeft");
-		}
-		else {
-			
-		}
-		if(rightStarting == true) {
-			System.out.println("NippleRight");
-		}
-		else {
-			
-		}
-		
-		if(middleStarting == true) {
-			System.out.println("NippleMid");
-		}
-		else {
-			
-		}
 		
 		CameraServer.getInstance().startAutomaticCapture();
 		
